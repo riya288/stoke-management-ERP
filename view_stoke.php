@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
    <?php require_once('include/headerscript.php'); ?>
@@ -20,7 +21,7 @@
                    <div class="row">
                       <div class="col-md-12">
                         <div class="page-title-box">
-                           <h4 class="page-title"></h4>
+                           <h4 class="page-title">Site Invoice</h4>
                            <div class="clearfix"></div>
                         </div>
                       </div>
@@ -32,13 +33,13 @@
                                <div class="col-sm-12">
                                    <div class="card-box">
                                        <div class="row">
-                                           <form class="form-horizontal" role="form">
+                                           <form class="form-horizontal" role="form" action="action/view_stoke.php" method="post">
                                                <div class="col-md-12">
 
                                                    <div class="row">
                                                        <div class="col-md-5">
-                                                           <label for="userName">Product Name<span class="text-danger">*</span></label>
-                                                           <select class="form-control select2">
+                                                           <label for="userName">Select Product Name<span class="text-danger">*</span></label>
+                                                           <select class="form-control select2" name="product">
                                                                <option value="AK">Sapa Road</option>
                                                                <option value="HI">Bhuravava Gurukrupa</option>
 
@@ -49,15 +50,15 @@
                                                                <label>Select Date</label>
                                                                <div>
                                                                    <div class="input-daterange input-group" id="date-range">
-                                                                       <input type="text" class="form-control" name="start" />
+                                                                       <input type="text" name="dt_from" class="form-control" name="start" />
                                                                        <span class="input-group-addon bg-custom text-white b-0">TO</span>
-                                                                       <input type="text" class="form-control" name="end" />
+                                                                       <input type="text" name="dt_to" class="form-control" name="end" />
                                                                    </div>
                                                                </div>
                                                            </div>
                                                        </div>
                                                        <div class="col-md-2">
-                                                           <button type="button" class="btn btn-primary btn-bordered waves-effect w-md waves-light m-b-5 m-t-30 pull-right">Search</button>
+                                                           <button type="submit" name="submit" class="btn btn-primary btn-bordered waves-effect w-md waves-light m-b-5 m-t-30 pull-right">Search</button>
                                                        </div>
                                                    </div>
                                                </div>
@@ -90,7 +91,6 @@
                                     <td>Amuja Pavadar</td>
                                     <td>Reti, Kapchi</td>
                                     <td>5000</td>
-                                    
                                  </tr>
                                  <tr>
                                      <td>2</td>
@@ -99,7 +99,6 @@
                                      <td>Amuja Pavadar</td>
                                      <td>Reti, Kapchi</td>
                                      <td>5000</td>
-                                     
                                  </tr>
                               </tbody>
                            </table>
@@ -119,96 +118,6 @@
       <!-- START Footerscript -->
       <?php require_once('include/footerscript.php'); ?>
 
-      <div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
-          <div class="modal-dialog modal-full">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                      <h4 class="modal-title" id="full-width-modalLabel">Agency Report</h4>
-                  </div>
-
-                  <div class="modal-body">
-                      <div class="row">
-                          <div class="col-md-12">
-
-                              <div class="row">
-                                  <div class="col-md-12">
-
-                                      <div class="clearfix">
-                                          <div class="pull-left">
-                                              <h4 >Site Name: <span>Saa Real estate</span></h4>
-                                              <h5> Address: <span>Sapa road guru krupa building Godhra</span></h5>
-                                          </div>
-                                          <div class="pull-right">
-                                              <h5>PO Date : <strong>22/2/2020</strong>
-                                              </h5>
-                                          </div>
-                                      </div>
-                                  </div><!-- end col -->
-                              </div>
-                              <!-- end row -->
-
-                              <div class="m-h-50"></div>
-
-                              <div class="row">
-                                  <div class="col-md-12">
-                                      <div class="table-responsive">
-                                          <table class="table m-t-30">
-                                              <thead>
-                                              <tr><th style="width:10%;">Sr No</th>
-                                                  <th style="width:10%;">Date</th>
-                                                  <th style="width:20%;">Agency</th>
-                                                  <th style="width:10%;">Item</th>
-                                                  <th style="width:30%;">Desc</th>
-                                                  <th style="width:10%;">Qty</th>
-                                                  <th style="width:10%; text-align: right;" >Total Rs</th>
-                                              </tr></thead>
-                                              <tbody>
-                                              <tr>
-                                                  <td>1</td>
-                                                  <td>25/2/2019</td>
-                                                  <td>JK CYMENT</td>
-                                                  <td>1</td>
-                                                  <td>Steal and Goods</td>
-                                                  <td>15</td>
-                                                  <td align="right">2380</td>
-                                              </tr>
-                                              <tr>
-                                                  <td>1</td>
-                                                  <td>25/2/2019</td>
-                                                  <td>Ambuja Cyment</td>
-                                                  <td>1</td>
-                                                  <td>Steal and Goods</td>
-                                                  <td>15</td>
-                                                  <td align="right">2380</td>
-                                              </tr>
-
-
-                                              </tbody>
-                                          </table>
-                                      </div>
-                                  </div>
-                              </div>
-
-                              <div class="row">
-                                  <div class="col-md-6 col-sm-6 col-xs-6">
-
-                                  </div>
-                                  <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-3">
-
-                                      <hr>
-                                      <h5 class="text-right">Total Rs:   2930.00</h5>
-                                  </div>
-                              </div>
-
-                          </div>
-
-
-                      </div>
-                  </div>
-
-              </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
+      
    </body>
 </html>

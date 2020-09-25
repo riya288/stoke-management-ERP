@@ -1,10 +1,6 @@
-
-
-
 <script>
             var resizefunc = [];
         </script>
-
         <!-- jQuery  -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!--Auto Complete js/css -->
@@ -13,8 +9,8 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <!--Auto Complete js/css end -->
         <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/common_validate.js"></script>
-        <script src="assets/js/common_function.js"></script>
+        <!-- <script src="assets/js/common_validate.js"></script> -->
+        <!-- <script src="assets/js/common_function.js"></script> -->
         <script src="assets/js/detect.js"></script>
         <script src="assets/js/fastclick.js"></script>
         <script src="assets/js/jquery.blockUI.js"></script>
@@ -30,7 +26,7 @@
         <script src="plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
         
         <!-- Google Charts js -->
-	    	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <!-- Init -->
         <script type="text/javascript" src="assets/pages/jquery.google-charts.init.js"></script>
 
@@ -79,17 +75,11 @@
         <script src="plugins/datatables/dataTables.scroller.min.js"></script>
         <script src="plugins/datatables/dataTables.colVis.js"></script>
         <script src="plugins/datatables/dataTables.fixedColumns.min.js"></script>
-
         <!-- init -->
         <script src="assets/pages/jquery.datatables.init.js"></script>
         <script src="assets/pages/jquery.form-pickers.init.js"></script>
         <script type="text/javascript" src="assets/pages/jquery.form-advanced.init.js"></script>
-
        <!--  <script src="assets/pages/jquery.dashboard_2.js"></script> -->
-       	 
-       
-
-
         <!-- App js -->
         <script src="assets/js/jquery.core.js"></script>
         <script src="assets/js/jquery.app.js"></script>

@@ -1,3 +1,43 @@
+<?php
+include_once('include/connection.php');
+include_once('include/session.php');
+include_once('include/config.php');
+include_once('include/flashMessage.php');
+include_once('include/input_validation.php');
+
+$msg = new FlashMessages();
+$queryDeleteSccess = 0;
+$queryDeleteError = 0;
+$datainsertsuccess =0;
+
+$datainserterror =0;
+if(isset($_GET['dId'])){
+    $id = $_GET['dId'];
+    $query = "DELETE FROM branch WHERE id = '$id'";
+      $result = mysqli_query($connect,$query);
+    if($result){
+        $queryDeleteSccess = 1;
+    }
+    else{
+        $queryDeleteError = 1;
+    }
+}
+?>
+<?php
+if (isset($_GET['hId']) && !empty($_GET['hId'])) {
+    $id = input_validate($_GET['hId']);
+    $query = "SELECT * FROM branch WHERE id = '$id'";
+    $result = mysqli_query($connect, $query);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $id = $row['id'];
+        $name = $row['name'];
+        $code = $row['code'];
+        $address = $row['address'];
+        $remark = $row['remark'];
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <?php require_once('include/headerscript.php'); ?>

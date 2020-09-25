@@ -70,7 +70,7 @@
                                 <a href="javascript:void(0);" class="waves-effect"><i class="ion-ios7-cloud-download-outline"></i><span> Database </span> </a>
                             </li> -->
                             <li>
-                                <a href="index.php" class="waves-effect"><i class="ion-log-out"></i><span> Logout </span></a>
+                                <a href="logout.php" class="waves-effect"><i class="ion-log-out"></i><span> Logout </span></a>
                             </li>
 
                             
