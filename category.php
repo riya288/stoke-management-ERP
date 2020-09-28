@@ -81,9 +81,9 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                                <input type="hidden" name="check" value="<?php if (isset($id) &&!empty($id)) { echo $id; } ?>">
                                             </div>
                                         </div>
-                                        <div class="col-md-6" align="left">
+                                        <div class="col-md-2" align="right">
 
-                                            <button type="submit" name="submit" class="btn btn-primary btn-bordered waves-effect w-md waves-light  m-t-35" id="submit_completed">Submit</button>
+                                            <button type="submit" name="submit" class="btn btn-primary btn-bordered waves-effect w-md waves-light  m-t-20" id="submit_completed">Submit</button>
 
                                         </div>
                                     </div>
@@ -109,15 +109,11 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                               </thead>
                               <tbody>
                                   <?php
-            $query = "SELECT * FROM category order by id DESC";
-
-            $result = mysqli_query($connect, $query);
-
-
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($result)) {
-
-                ?>
+                                    $query = "SELECT * FROM category order by id DESC";
+                                    $result = mysqli_query($connect, $query);
+                                    $i = 1;
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                  ?>
                                    <tr>
                                        <td><?php echo $i ?></td>
                                        <td> 
@@ -171,19 +167,7 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
       <!-- START Footerscript -->
       <?php require_once('include/footerscript.php'); ?>
 
-     <script>
-         $(document).ready(function(){
-
-             $('#filer_input2').filer({
-                 limit: 15,
-                 maxSize: 15,
-                 extensions: ['jpg', 'jpeg', 'png', 'gif', 'psd'],
-                 changeInput: true,
-                 showThumbs: true,
-                 addMore: true
-             });
-         });
-     </script>
+    
 
 <script>
   $("#hide").hide();

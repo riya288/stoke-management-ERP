@@ -1,4 +1,10 @@
-
+<?php
+include_once('include/connection.php');
+include_once('include/session.php');
+include_once('include/config.php');
+include_once('include/flashMessage.php');
+include_once('include/input_validation.php');
+?>
 <!DOCTYPE html>
 <html>
    <?php require_once('include/headerscript.php'); ?>
@@ -39,9 +45,17 @@
                                                    <div class="row">
                                                        <div class="col-md-5">
                                                            <label for="userName">Select Product Name<span class="text-danger">*</span></label>
-                                                           <select class="form-control select2" name="product">
-                                                               <option value="AK">Sapa Road</option>
-                                                               <option value="HI">Bhuravava Gurukrupa</option>
+                                                           <select class="form-control select2" name="product" id="view_product">
+                                                               <option value="">Please choose</option>
+                                                                <?php  $query = "SELECT * FROM product order by id DESC";
+                                                                $result = mysqli_query($connect, $query);
+                                                                $i = 1;
+                                                                while ($row = mysqli_fetch_assoc($result)) {?>
+                                                                <option value="<?php echo $row['product'];?>"><?php echo $row['product'];?></option>
+                                                                <?php
+                                                                  $i++;
+                                                              }
+                                                              ?>
 
                                                            </select>
                                                        </div>
@@ -50,9 +64,9 @@
                                                                <label>Select Date</label>
                                                                <div>
                                                                    <div class="input-daterange input-group" id="date-range">
-                                                                       <input type="text" name="dt_from" class="form-control" name="start" />
+                                                                       <input type="text" id="from_dt" name="from_dt" class="form-control"  onkeyup="myfunction()" />
                                                                        <span class="input-group-addon bg-custom text-white b-0">TO</span>
-                                                                       <input type="text" name="dt_to" class="form-control" name="end" />
+                                                                       <input type="text" id="to_dt" name="to_dt" class="form-control"  onkeyup="myfunction()" />
                                                                    </div>
                                                                </div>
                                                            </div>
@@ -117,7 +131,24 @@
       <!-- END wrapper -->
       <!-- START Footerscript -->
       <?php require_once('include/footerscript.php'); ?>
-
+<script>
+  function myfunction(){
+      var from_dt = ('#from_dt').val();
+      var to_dt = ('#to_dt').val();
+      $.ajax({
+        url: "view_product.php",
+        type: "POST",
+        data: {
+          from_dt: from_dt
+          to_dt: to_dt
+        },
+        cache: false,
+        success: function(dataResult){
+          $("#product").html(dataResult);
+        }
+      });
+  }
+</script>
       
    </body>
 </html>

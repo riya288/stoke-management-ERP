@@ -81,7 +81,15 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                               <label for="category">Product Category Name<span class="text-danger">*</span></label>
                                               <select class="select2" name="category" id="category">
                                                   <option>please choose</option>
-                                                  <option>Clothes</option>
+                                                 <?php  $query = "SELECT * FROM category order by id DESC";
+                                                  $result = mysqli_query($connect, $query);
+                                                  $i = 1;
+                                                  while ($row = mysqli_fetch_assoc($result)) {?>
+                                                  <option value="<?php echo $row['category'];?>"><?php echo $row['category'];?></option>
+                                                  <?php
+                                                    $i++;
+                                                }
+                                                ?>
                                               </select>
                                             </div>
                                         </div>
@@ -89,8 +97,7 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                             <div class="form-group">
                                               <label for="sub_category">Product Sub Category Name<span class="text-danger">*</span></label>
                                               <select class="select2" name="sub_category" id="sub_category">
-                                                  <option>please choose</option>
-                                                  <option>Man</option>
+                                                 
                                               </select>
                                             </div>
                                         </div>
@@ -99,13 +106,13 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                         <div class="col-md-6">
                                             <div class="form-group">
                                               <label for="sub_sub_category">Product Sub Sub Category Name<span class="text-danger">*</span></label>
-                                              <input type="text" name="sub_sub_category" parsley-trigger="change" required="" placeholder="Enter Product Sub Sub Category Name" class="form-control" id="sub_sub_category">
+                                              <input type="text" name="sub_sub_category" parsley-trigger="change" placeholder="Enter Product Sub Sub Category Name" class="form-control" id="sub_sub_category">
                                                <input type="hidden" name="check" value="<?php if (isset($id) &&!empty($id)) { echo $id; } ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6" align="left">
 
-                                            <button type="submit" name="submit" class="btn btn-primary btn-bordered waves-effect w-md waves-light m-b-5 m-t-25" id="submit_completed">Submit</button>
+                                            <button type="submit" name="submit" class="btn btn-primary btn-bordered waves-effect w-md waves-ligh m-t-20" id="submit_completed">Submit</button>
 
                                         </div>
                                     </div>
@@ -193,20 +200,7 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
       <!-- START Footerscript -->
       <?php require_once('include/footerscript.php'); ?>
 
-     <script>
-         $(document).ready(function(){
-
-             $('#filer_input2').filer({
-                 limit: 15,
-                 maxSize: 15,
-                 extensions: ['jpg', 'jpeg', 'png', 'gif', 'psd'],
-                 changeInput: true,
-                 showThumbs: true,
-                 addMore: true
-             });
-         });
-     </script>
-
+   
 <script>
   $("#hide").hide();
   jQuery('.add').click(function(event) {
@@ -215,6 +209,27 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
 
                 }); 
   
+</script>
+<script>
+// $(document).ready(function() {
+  $('#category').on("change",function() {
+      var category_id = this.value;
+      //console.log(category_id);
+      $.ajax({
+        url: "get_subcat.php",
+        type: "POST",
+        data: {
+          category_id: category_id
+        },
+        cache: false,
+        success: function(dataResult){
+          $("#sub_category").html(dataResult);
+        }
+      });
+    
+    
+  });
+// });
 </script>
    </body>
 </html>

@@ -60,7 +60,7 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                   <div class="row">
                      <div class="col-xs-12">
                         <div class="page-title-box">
-                           <h4 class="page-title">Add Product Sub Category</h4>
+                           <h4 class="page-title">Add Product</h4>
                            <div class="clearfix"></div>
                         </div>
                      </div>
@@ -79,19 +79,26 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                              <label for="userName">Product Category Name<span class="text-danger">*</span></label>
-                                              <select class="select2" name="category">
+                                              <label for="category">Product Category Name<span class="text-danger">*</span></label>
+                                               <select class="select2" name="category" id="category">
                                                   <option>please choose</option>
-                                                  <option>Clothes</option>
+                                                 <?php  $query = "SELECT * FROM category order by id DESC";
+                                                  $result = mysqli_query($connect, $query);
+                                                  $i = 1;
+                                                  while ($row = mysqli_fetch_assoc($result)) {?>
+                                                  <option value="<?php echo $row['category'];?>"><?php echo $row['category'];?></option>
+                                                  <?php
+                                                    $i++;
+                                                }
+                                                ?>
                                               </select>
                                             </div>
-                                        </div>
+                                        </div> 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                              <label for="userName">Product Sub Category Name<span class="text-danger">*</span></label>
-                                              <select class="select2" name="sub_category">
-                                                  <option>please choose</option>
-                                                  <option>Man</option>
+                                              <label for="sub_category">Product Sub Category Name<span class="text-danger">*</span></label>
+                                             <select class="select2" name="sub_category" id="sub_category">
+                                                 
                                               </select>
                                             </div>
                                         </div>
@@ -99,18 +106,16 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="userName">Select Sub Sub Category<span class="text-danger">*</span></label>
-                                               <select class="form-control select2" name="sub_sub_category">
-                                                   <option>Select</option>
-                                                   <option value="AK">Shirt</option>
-                                                   <option value="HI">Jeanse</option>
+                                                <label for="sub_sub_category">Select Sub Sub Category<span class="text-danger">*</span></label>
+                                               <select class="form-control select2" name="sub_sub_category" id="sub_sub_category">
+                                                  
                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                           <div class="form-group">
                                              <label for="userName">Product Name<span class="text-danger">*</span></label>
-                                              <input type="text" name="product" parsley-trigger="change" required="" placeholder="Product name" class="form-control" id="userName">
+                                              <input type="text" name="product" parsley-trigger="change"  placeholder="Product name" class="form-control" id="userName">
                                                <input type="hidden" name="check" value="<?php if (isset($id) &&!empty($id)) { echo $id; } ?>">
                                           </div>
                                        </div>
@@ -142,15 +147,11 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                               </thead>
                               <tbody>
                                   <?php
-            $query = "SELECT * FROM product order by id DESC";
-
-            $result = mysqli_query($connect, $query);
-
-
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($result)) {
-
-                ?>
+                                      $query = "SELECT * FROM product order by id DESC";
+                                      $result = mysqli_query($connect, $query);
+                                      $i = 1;
+                                      while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
                                    <tr>
                                        <td><?php echo $i ?></td>
                                        <td> 
@@ -171,21 +172,16 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                         </td>
                                        <td>
                                         <a href="product.php?hId=<?php if (isset($row['id']) &&
-                                                        !empty($row['id'])) {echo $row['id'];} ?>" title="Edit">
-                                                        <i class="fa fa-edit" style="font-size: 20px;"></i>
-                                                        </a>
-                                                 <a href="product.php?dId=<?php if(isset($row['id']) && !empty($row['id'])){ echo $row['id']; }?>" onClick="return confirm('Are you sure you want to delete this record');" title="Delete">
-                                                            <i class="fa fa-trash" style="font-size: 20px;"></i>
-                                                        </a>
-
+                                          !empty($row['id'])) {echo $row['id'];} ?>" title="Edit">
+                                          <i class="fa fa-edit" style="font-size: 20px;"></i></a>
+                                        <a href="product.php?dId=<?php if(isset($row['id']) && !empty($row['id'])){ echo $row['id']; }?>" onClick="return confirm('Are you sure you want to delete this record');" title="Delete">
+                                          <i class="fa fa-trash" style="font-size: 20px;"></i></a>
                                        </td>
                                    </tr>
                                    <?php
-                $i++;
-
-            }
-
-            ?>
+                                        $i++;
+                                    }
+                                    ?>
                               </tbody>
                            </table>
                         </div>
@@ -204,28 +200,13 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
       <!-- START Footerscript -->
       <?php require_once('include/footerscript.php'); ?>
 
-     <script>
-         $(document).ready(function(){
-
-             $('#filer_input2').filer({
-                 limit: 15,
-                 maxSize: 15,
-                 extensions: ['jpg', 'jpeg', 'png', 'gif', 'psd'],
-                 changeInput: true,
-                 showThumbs: true,
-                 addMore: true
-             });
-         });
-     </script>
-
 <script>
   $("#hide").hide();
   jQuery('.add').click(function(event) {
                    $("#hide").slideToggle();
                    $("#show").slideToggle();   
-
                 }); 
-  
 </script>
+
    </body>
 </html>

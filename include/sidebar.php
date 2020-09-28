@@ -8,7 +8,7 @@
                            <li class="menu-title">Navigation</li>
 
                             <li>
-                                <a href="dashboard.php" class="waves-effect"><i class="ti-dashboard"></i><span> Dashboard </span> </a>
+                                <a href="index.php" class="waves-effect"><i class="ti-dashboard"></i><span> Dashboard </span> </a>
                             </li>
 
                             <li class="has_sub">

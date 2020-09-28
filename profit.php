@@ -88,21 +88,28 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                              <label for="product">Product Name<span class="text-danger">*</span></label>
                                               <select class="form-control select2" name="product" id="product">
                                                    <option>Select</option>
-                                                   <option value="AK">Shirt</option>
-                                                   <option value="HI">Jeanse</option>
+                                                    <?php  $query = "SELECT * FROM product order by id DESC";
+                                                  $result = mysqli_query($connect, $query);
+                                                  $i = 1;
+                                                  while ($row = mysqli_fetch_assoc($result)) {?>
+                                                  <option value="<?php echo $row['product'];?>"><?php echo $row['product'];?></option>
+                                                  <?php
+                                                    $i++;
+                                                }
+                                                ?>
                                                </select>
                                           </div>
                                        </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="total">Purchase Amount<span class="text-danger">*</span></label>
-                                                <input type="text" id="total" name="total" parsley-trigger="change" required="" class="form-control" placeholder="RS...">
+                                                <input type="text" id="total" name="total" parsley-trigger="change"  class="form-control" placeholder="RS...">
                                             </div>
                                         </div>
                                          <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="sel_amt">Shelling Amount<span class="text-danger">*</span></label>
-                                                <input type="text" id="sel_amt" name="sel_amt" parsley-trigger="change" required="" class="form-control" placeholder="RS...">
+                                                <input type="text" id="sel_amt" name="sel_amt" parsley-trigger="change"  class="form-control" placeholder="RS...">
                                             </div>
                                         </div>
                                          <div class="col-md-6">
@@ -139,13 +146,13 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="profit">Profit<span class="text-danger">*</span></label>
-                                                <input type="text" id="profit" name="profit" parsley-trigger="change" required="" class="form-control" placeholder="RS...">
+                                                <input type="text" id="profit" name="profit" parsley-trigger="change"  class="form-control" placeholder="RS..." readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="loss">Loss<span class="text-danger">*</span></label>
-                                                <input type="text" id="loss" name="loss" parsley-trigger="change" required="" class="form-control" placeholder="RS...">
+                                                <input type="text" id="loss" name="loss" parsley-trigger="change"  class="form-control" placeholder="RS..." readonly>
                                                  <input type="hidden" name="check" value="<?php if (isset($id) &&!empty($id)) { echo $id; } ?>">
                                             </div>
                                         </div>
@@ -169,25 +176,21 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                    <thead>
                                    <tr>
                                        <th>Sr No</th>
-                                       <th>date</th>
                                        <th>product name</th>
                                        <th>Profit</th>
                                        <th>Loss</th>
                                        <th>Amount</th>
+                                       <th>date</th>
                                        <th>Action</th>
                                    </tr>
                                    </thead>
                                    <tbody>
                                     <?php
-            $query = "SELECT * FROM profit order by id DESC";
-
-            $result = mysqli_query($connect, $query);
-
-
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($result)) {
-
-                ?>
+                                      $query = "SELECT * FROM profit order by id DESC";
+                                      $result = mysqli_query($connect, $query);
+                                      $i = 1;
+                                      while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
                                    <tr>
                                        <td><?php echo $i ?></td>
                                        <td> 
@@ -216,9 +219,9 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                         </td>
                                         <td> 
                                         <?php
-                                            if(isset($row['amount']) && !empty($row['amount']))
+                                            if(isset($row['total']) && !empty($row['total']))
                                             {
-                                                echo $row['amount']; 
+                                                echo $row['total']; 
                                             }
                                             ?>
                                         </td>
@@ -231,25 +234,19 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                             ?>
                                         </td>
                                        <td>
-                                        <a href="report_site.php" title="pdf">
-                                                        <i class="fa fa-print" style="font-size: 20px;"></i>
-                                                        </a>
-                                           <a href="profit.php?hId=<?php if (isset($row['id']) &&
-                                                        !empty($row['id'])) {echo $row['id'];} ?>" title="Edit">
-                                                        <i class="fa fa-edit" style="font-size: 20px;"></i>
-                                                        </a>
-                                                 <a href="profit.php?dId=<?php if(isset($row['id']) && !empty($row['id'])){ echo $row['id']; }?>" onClick="return confirm('Are you sure you want to delete this record');" title="Delete">
-                                                            <i class="fa fa-trash" style="font-size: 20px;"></i>
-                                                        </a>
-
+                                          <a href="report_site.php?hId=<?php if (isset($row['id']) &&
+                                         !empty($row['id'])) {echo $row['id'];} ?>" title="pdf"><i class="fa fa-print" style="font-size: 20px;"></i></a>
+                                          <a href="profit.php?hId=<?php if (isset($row['id']) &&
+                                         !empty($row['id'])) {echo $row['id'];} ?>" title="Edit">
+                                          <i class="fa fa-edit" style="font-size: 20px;"></i></a>
+                                          <a href="profit.php?dId=<?php if(isset($row['id']) && !empty($row['id'])){ echo $row['id']; }?>" onClick="return confirm('Are you sure you want to delete this record');" title="Delete">
+                                          <i class="fa fa-trash" style="font-size: 20px;"></i></a>
                                        </td>
                                    </tr>
                                    <?php
-                $i++;
-
-            }
-
-            ?>
+                                        $i++;
+                                    }
+                                    ?>
                                    </tbody>
                                </table>
                            </div>

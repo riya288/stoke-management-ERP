@@ -1,3 +1,29 @@
+<?php
+include_once('include/connection.php');
+include_once('include/session.php');
+include_once('include/config.php');
+include_once('include/flashMessage.php');
+include_once('include/input_validation.php');
+
+if (isset($_GET['hId']) && !empty($_GET['hId'])) {
+    $id = input_validate($_GET['hId']);
+    $query = "SELECT * FROM profit WHERE id = '$id'";
+    $result = mysqli_query($connect, $query);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $id = $row['id'];
+        $product = $row['product'];
+        $total = $row['total'];
+        $sel_amt = $row['sel_amt'];
+        $tax = $row['tax'];
+        $cgst = $row['cgst'];
+        $sgst = $row['sgst'];
+        $total_gst = $row['total_gst'];
+        $profit = $row['profit'];
+        $loss = $row['loss'];
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <?php require_once('include/headerscript.php'); ?>
@@ -40,17 +66,13 @@
                                             </div>
                                         </div>
                                         <hr>
-
-
                                         <div class="m-h-50"></div>
-
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="table-responsive">
                                                     <table class="table m-t-30">
                                                         <thead>
                                                         <tr><th style="width:10%;">Sr No</th>
-                                                            <th style="width:10%;">Date</th>
                                                             <th style="width:40%;">Product Name</th>
                                                             <th style="width:10%;">Profit</th>
                                                             <th style="width:10%;">Loss</th>
@@ -59,11 +81,10 @@
                                                         <tbody>
                                                         <tr>
                                                             <td>1</td>
-                                                            <td>25/2/2019</td>
-                                                            <td>Shirt</td>
-                                                            <td>200</td>
-                                                            <td></td>
-                                                            <td align="right">500</td>
+                                                            <td><?php echo $product; ?></td>
+                                                            <td><?php echo $profit; ?></td>
+                                                            <td><?php echo $loss; ?></td>
+                                                            <td align="right"><?php echo $sel_amt;?></td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -77,7 +98,6 @@
                                             <div class="col-md-3 col-sm-6 col-xs-6 col-md-offset-3">
 
                                                 <hr>
-                                                <h4 class="text-right"> Total Rs:   2930.00</h4>
                                             </div>
                                         </div>
                                         <hr>

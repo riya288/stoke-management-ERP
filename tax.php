@@ -131,15 +131,11 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                    </thead>
                                    <tbody>
                                     <?php
-            $query = "SELECT * FROM tax order by id DESC";
-
-            $result = mysqli_query($connect, $query);
-
-
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($result)) {
-
-                ?>
+                                      $query = "SELECT * FROM tax order by id DESC";
+                                      $result = mysqli_query($connect, $query);
+                                      $i = 1;
+                                      while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
                                    <tr>
                                        <td><?php echo $i ?></td>
                                        <td> 

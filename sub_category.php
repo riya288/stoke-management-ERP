@@ -80,7 +80,15 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                               <label for="category">Product Category Name<span class="text-danger">*</span></label>
                                               <select class="select2" name="category">
                                                   <option>please choose</option>
-                                                  <option>Clothes</option>
+                                                <?php  $query = "SELECT * FROM category order by id DESC";
+                                                  $result = mysqli_query($connect, $query);
+                                                  $i = 1;
+                                                  while ($row = mysqli_fetch_assoc($result)) {?>
+                                                  <option><?php echo $row['category'];?></option>
+                                                  <?php
+                                                    $i++;
+                                                }
+                                                ?>
                                               </select>
                                             </div>
                                         </div>
@@ -93,7 +101,7 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                         </div>
                                         <div class="col-md-2" align="left">
 
-                                            <button type="submit" name="submit" class="btn btn-primary btn-bordered waves-effect w-md waves-light m-b-5 m-t-25" id="submit_completed">Submit</button>
+                                            <button type="submit" name="submit" class="btn btn-primary btn-bordered waves-effect w-md waves-light m-t-20" id="submit_completed">Submit</button>
 
                                         </div>
                                     </div>
@@ -181,20 +189,7 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
       <!-- START Footerscript -->
       <?php require_once('include/footerscript.php'); ?>
 
-     <script>
-         $(document).ready(function(){
-
-             $('#filer_input2').filer({
-                 limit: 15,
-                 maxSize: 15,
-                 extensions: ['jpg', 'jpeg', 'png', 'gif', 'psd'],
-                 changeInput: true,
-                 showThumbs: true,
-                 addMore: true
-             });
-         });
-     </script>
-
+    
 <script>
   $("#hide").hide();
   jQuery('.add').click(function(event) {

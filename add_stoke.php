@@ -84,38 +84,41 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                          <div class="col-md-6">
                                              <div class="form-group">
                                                  <label for="category">Select Category<span class="text-danger">*</span></label>
-                                                 <select class="form-control select2" name="category">
+                                                 <select class="form-control select2" name="category" id="category">
                                                      <option>Select</option>
-                                                         <option value="AK">Clothes</option>
+                                                         <?php  $query = "SELECT * FROM category order by id DESC";
+                                                  $result = mysqli_query($connect, $query);
+                                                  $i = 1;
+                                                  while ($row = mysqli_fetch_assoc($result)) {?>
+                                                  <option value="<?php echo $row['category'];?>"><?php echo $row['category'];?></option>
+                                                  <?php
+                                                    $i++;
+                                                }
+                                                ?>
                                                  </select>
                                              </div>
                                          </div>
                                        <div class="col-md-6">
                                            <div class="form-group">
                                                <label for="sub_category">Select Sub Category<span class="text-danger">*</span></label>
-                                               <select class="form-control select2" name="sub_category">
-                                                   <option>Select</option>
-                                                   <option value="AK">Man</option>
-
+                                               <select class="form-control select2" name="sub_category" id="sub_category">
+                                                  
                                                </select>
                                            </div>
                                        </div>
                                         <div class="col-md-6">
                                            <div class="form-group">
                                                <label for="sub_sub_category">Select Sub Sub Category<span class="text-danger">*</span></label>
-                                               <select class="form-control select2" name="sub_sub_category">
-                                                   <option>Select</option>
-                                                   <option value="AK">Shirt</option>
-                                                   <option value="HI">Jeanse</option>
+                                               <select class="form-control select2" name="sub_sub_category" id="sub_sub_category">
+                                                   
                                                </select>
                                            </div>
                                        </div>
                                        <div class="col-md-6">
                                           <div class="form-group">
                                              <label for="product">Product Name<span class="text-danger">*</span></label>
-                                              <select class="form-control select2" name="product">
-                                                     <option>Select</option>
-                                                         <option value="AK">Cuban Collar Short Sleeve Shirt</option>
+                                              <select class="form-control select2" name="product" id="product">
+                                                     
                                                  </select>
                                           </div>
                                        </div>
@@ -175,15 +178,11 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                    </thead>
                                    <tbody>
                                      <?php
-            $query = "SELECT * FROM add_stoke order by id DESC";
-
-            $result = mysqli_query($connect, $query);
-
-
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($result)) {
-
-                ?>
+                                        $query = "SELECT * FROM add_stoke order by id DESC";
+                                        $result = mysqli_query($connect, $query);
+                                        $i = 1;
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                     ?>
                                    <tr>
                                        <td><?php echo $i ?></td>
                                        <td> 
@@ -228,21 +227,16 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                         </td>
                                        <td>
                                         <a href="add_stoke.php?hId=<?php if (isset($row['id']) &&
-                                                        !empty($row['id'])) {echo $row['id'];} ?>" title="Edit">
-                                                        <i class="fa fa-edit" style="font-size: 20px;"></i>
-                                                        </a>
-                                                 <a href="add_stoke.php?dId=<?php if(isset($row['id']) && !empty($row['id'])){ echo $row['id']; }?>" onClick="return confirm('Are you sure you want to delete this record');" title="Delete">
-                                                            <i class="fa fa-trash" style="font-size: 20px;"></i>
-                                                        </a>
-
+                                          !empty($row['id'])) {echo $row['id'];} ?>" title="Edit">
+                                          <i class="fa fa-edit" style="font-size: 20px;"></i></a>
+                                        <a href="add_stoke.php?dId=<?php if(isset($row['id']) && !empty($row['id'])){ echo $row['id']; }?>" onClick="return confirm('Are you sure you want to delete this record');" title="Delete">
+                                          <i class="fa fa-trash" style="font-size: 20px;"></i></a>
                                        </td>
                                    </tr>
                                    <?php
-                $i++;
-
-            }
-
-            ?>
+                                        $i++;
+                                    }
+                                    ?>
                                    </tbody>
                                </table>
                            </div>

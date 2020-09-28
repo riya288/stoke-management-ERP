@@ -97,13 +97,13 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                          <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="userName">Billed to<span class="text-danger">*</span></label>
-                                                <input type="text" name="bill_to" value="<?php if(isset($bill_to) && !empty($bill_to)) {echo $bill_to;} ?>" parsley-trigger="change" required="" placeholder="customer name" class="form-control new">
+                                                <input type="text" name="bill_to" value="<?php if(isset($bill_to) && !empty($bill_to)) {echo $bill_to;} ?>" parsley-trigger="change"  placeholder="customer name" class="form-control new">
                                             </div>
                                         </div>
                                       <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="userName">Company Name<span class="text-danger">*</span></label>
-                                                <input type="text" name="name" value="<?php if(isset($name) && !empty($name)) {echo $name;} ?>" parsley-trigger="change" required="" placeholder="company name" class="form-control new">
+                                                <input type="text" name="name" value="<?php if(isset($name) && !empty($name)) {echo $name;} ?>" parsley-trigger="change"  placeholder="company name" class="form-control new">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -115,21 +115,7 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="userName">Invoice no<span class="text-danger">*</span></label>
-                                                <?php $query = "SELECT * FROM add_product"; 
-                                                   $result = mysqli_query($connect,$query); ?>
-                                                <input type="text" name="invoice_no" value="<?php
-                                                              if(isset($_GET['hId']) && !empty($_GET['hId']))  {
-                                                              if(isset($invoice_no) &&
-                                                                  !empty($invoice_no)){
-                                                                        echo $invoice_no;
-                                                                    }    
-                                                                    }else{    
-                                                            if(mysqli_num_rows($result)>0){
-                                                                    $row = mysqli_fetch_assoc($result);
-                                                                    echo $row['invoice_no']+1;}
-                                                            else{
-                                                                    $row['invoice_no']=1;
-                                                                    echo $row['invoice_no'];} } ?>" parsley-trigger="change" required="" placeholder="0" class="form-control new" readonly>
+                                                <input type="text" name="invoice_no" value="" parsley-trigger="change"  placeholder="0" class="form-control new" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -144,34 +130,42 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="userName">P.O Number<span class="text-danger">*</span></label>
-                                                <input type="text" name="po_no" value="<?php if(isset($po_no) && !empty($po_no)) {echo $po_no;} ?>" parsley-trigger="change" required="" placeholder="" class="form-control new">
+                                                <input type="text" name="po_no" value="<?php if(isset($po_no) && !empty($po_no)) {echo $po_no;} ?>" parsley-trigger="change"  placeholder="" class="form-control new">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="userName">State code<span class="text-danger">*</span></label>
-                                                <input type="text" name="state_code" value="<?php if(isset($state_code) && !empty($state_code)) {echo $state_code;} ?>" parsley-trigger="change" required="" placeholder="" class="form-control new">
+                                                <input type="text" name="state_code" value="<?php if(isset($state_code) && !empty($state_code)) {echo $state_code;} ?>" parsley-trigger="change"  placeholder="" class="form-control new">
                                             </div>
                                         </div>
                                          <div class="col-md-6">
                                              <div class="form-group">
                                                  <label for="userName">Select Category<span class="text-danger">*</span></label>
-                                                 <select class="form-control select2" name="category">
-                                                     <option>Select</option>
-                                                         <option value="AK">Clothes</option>
+                                                 <select class="form-control select2" name="category" id="category">
+                                                     <option>Please choose</option>
+                                                        <?php  $query = "SELECT * FROM category order by id DESC";
+                                                  $result = mysqli_query($connect, $query);
+                                                  $i = 1;
+                                                  while ($row = mysqli_fetch_assoc($result)) {?>
+                                                  <option value="<?php echo $row['category'];?>"><?php echo $row['category'];?></option>
+                                                  <?php
+                                                    $i++;
+                                                }
+                                                ?>
                                                  </select>
                                              </div>
                                          </div>
                                          <div class="col-md-3">
                                             <div class="form-group">
                                                   <label for="userName">GST Number<span class="text-danger">*</span></label>
-                                                <input type="text" name="gst_no" value="<?php if(isset($gst_no) && !empty($gst_no)) {echo $gst_no;} ?>" parsley-trigger="change" required="" placeholder="" class="form-control new">
+                                                <input type="text" name="gst_no" value="<?php if(isset($gst_no) && !empty($gst_no)) {echo $gst_no;} ?>" parsley-trigger="change"  placeholder="" class="form-control new">
                                               </div>
                                         </div>
                                          <div class="col-md-3">
                                              <div class="form-group">
                                                  <label for="userName">Stoke<span class="text-danger">*</span></label>
-                                                 <input type="text" name="stoke" value="<?php if(isset($stoke) && !empty($stoke)) {echo $stoke;} ?>" value="100" parsley-trigger="change" required="" class="form-control" id="userName" readonly>
+                                                 <input type="text" name="stoke" value="<?php if(isset($stoke) && !empty($stoke)) {echo $stoke;} ?>" value="100" parsley-trigger="change"  class="form-control" id="userName" readonly>
                                              </div>
                                          </div>
                                      </div>
@@ -179,20 +173,16 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                        <div class="col-md-6">
                                            <div class="form-group">
                                                <label for="userName">Select Sub Category<span class="text-danger">*</span></label>
-                                               <select class="form-control select2" name="sub_category">
-                                                   <option>Select</option>
-                                                   <option value="AK">Man</option>
-
+                                               <select class="form-control select2" name="sub_category" id="sub_category">
+                                                  
                                                </select>
                                            </div>
                                        </div>
                                         <div class="col-md-6">
                                           <div class="form-group">
-                                             <label for="userName">Product Name<span class="text-danger">*</span></label>
-                                              <select class="form-control select2" name="product">
-                                                   <option>Select</option>
-                                                   <option value="AK">Shirt</option>
-                                                   <option value="HI">Jeanse</option>
+                                             <label for="product">Product Name<span class="text-danger">*</span></label>
+                                              <select class="form-control select2" name="product" id="product">
+                                                   
                                                </select>
                                           </div>
                                        </div>
@@ -201,39 +191,43 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                        <div class="col-md-6">
                                            <div class="form-group">
                                                <label for="userName">Select Sub Sub Category<span class="text-danger">*</span></label>
-                                               <select class="form-control select2" name="sub_sub_category">
-                                                   <option>Select</option>
-                                                   <option value="AK">Shirt</option>
-                                                   <option value="HI">Jeanse</option>
+                                               <select class="form-control select2" name="sub_sub_category" id="sub_sub_category">
+                                                  
                                                </select>
                                            </div>
                                        </div>
                                        <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="userName">Qty<span class="text-danger">*</span></label>
-                                                <input type="text" name="qty" value="<?php if(isset($qty) && !empty($qty)) {echo $qty;} ?>" parsley-trigger="change" required="" placeholder="Qty" class="form-control new" id="qty">
+                                                <label for="qty">Qty<span class="text-danger">*</span></label>
+                                                <input type="text" name="qty" value="<?php if(isset($qty) && !empty($qty)) {echo $qty;} ?>" parsley-trigger="change"  placeholder="Qty" class="form-control new" id="qty">
                                             </div>
                                         </div>
                                          <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="userName">Rate<span class="text-danger">*</span></label>
-                                                <input type="text" name="rate" value="<?php if(isset($rate) && !empty($rate)) {echo $rate;} ?>" parsley-trigger="change" required="" placeholder="RS..." class="form-control new" id="rate">
+                                                <label for="rate">Rate<span class="text-danger">*</span></label>
+                                                <input type="text" name="rate" value="<?php if(isset($rate) && !empty($rate)) {echo $rate;} ?>" parsley-trigger="change"  placeholder="RS..." class="form-control new" id="rate">
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="userName">Total Amount<span class="text-danger">*</span></label>
-                                                <input type="text" id="total" name="total" value="<?php if(isset($total) && !empty($total)) {echo $total;} ?>" parsley-trigger="change" required="" class="form-control" placeholder="RS...">
+                                                <label for="total">Total Amount<span class="text-danger">*</span></label>
+                                                <input type="text" id="total" name="total" value="<?php if(isset($total) && !empty($total)) {echo $total;} ?>" parsley-trigger="change"  class="form-control" placeholder="RS...">
                                             </div>
                                         </div>
                                          <div class="col-md-6">
                                              <div class="form-group">
                                                  <label for="userName">Select Tax<span class="text-danger">*</span></label>
                                                  <select class="form-control select2 select" name="tax">
-                                                     <option>Select</option>
-                                                         <option value="AK">GST</option>
-                                                         <option value="1">Non GST</option>
-                                                         <option value="AK">Other</option>
+                                                     <option>Please choose</option>
+                                                          <?php  $query = "SELECT * FROM tax order by id DESC";
+                                                  $result = mysqli_query($connect, $query);
+                                                  $i = 1;
+                                                  while ($row = mysqli_fetch_assoc($result)) {?>
+                                                  <option value="<?php echo $row['tax'];?>"><?php echo $row['tax'];?></option>
+                                                  <?php
+                                                    $i++;
+                                                }
+                                                ?>
                                                  </select>
                                                   <input type="hidden" name="check" value="<?php if (isset($id) &&!empty($id)) { echo $id; } ?>">
                                              </div>
@@ -292,24 +286,20 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                        <th>rate</th>
                                        <th>total</th>
                                        <th>tax</th>
-                                       <th></th>
-                                       <th></th>
-                                       <th></th>
-                                       <th></th>
+                                       <th>cgst</th>
+                                       <th>sgst</th>
+                                       <th>total_gst</th>
+                                       <th>date</th>
                                        <th>Action</th>
                                    </tr>
                                    </thead>
                                    <tbody>
                                     <?php
-            $query = "SELECT * FROM add_product order by id DESC";
-
-            $result = mysqli_query($connect, $query);
-
-
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($result)) {
-
-                ?>
+                                      $query = "SELECT * FROM add_product order by id DESC";
+                                      $result = mysqli_query($connect, $query);
+                                      $i = 1;
+                                      while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
                                    <tr>
                                        <td><?php echo $i ?></td>
                                        <td> 
@@ -471,11 +461,9 @@ if (isset($_GET['hId']) && !empty($_GET['hId'])) {
                                        </td>
                                    </tr>
                                    <?php
-                $i++;
-
-            }
-
-            ?>
+                                        $i++;
+                                    }
+                                    ?>
                                    </tbody>
                                </table>
                            </div>

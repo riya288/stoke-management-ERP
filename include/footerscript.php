@@ -112,6 +112,50 @@
             TableManageButtons.init();
 
         </script>
+        <script>
+  $('#category').on("change",function() {
+      var category_id = this.value;
+      $.ajax({
+        url: "get_subcat.php",
+        type: "POST",
+        data: {
+          category_id: category_id
+        },
+        cache: false,
+        success: function(dataResult){
+          $("#sub_category").html(dataResult);
+        }
+      });
+  });
+  $('#sub_category').on("change",function() {
+      var category_id = this.value;
+      $.ajax({
+        url: "get_subsubcat.php",
+        type: "POST",
+        data: {
+          category_id: category_id
+        },
+        cache: false,
+        success: function(dataResult){
+          $("#sub_sub_category").html(dataResult);
+        }
+      });
+  });
+   $('#sub_sub_category').on("change",function() {
+      var category_id = this.value;
+      $.ajax({
+        url: "get_product.php",
+        type: "POST",
+        data: {
+          category_id: category_id
+        },
+        cache: false,
+        success: function(dataResult){
+          $("#product").html(dataResult);
+        }
+      });
+  });
+</script>
 
 
 
